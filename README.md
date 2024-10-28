@@ -9,35 +9,35 @@
    - Added *Prometheus monitoring* to observe and track metrics within the Kubernetes environment.
    - The steps taken:
      1. *Added Prometheus Helm Repository*:
-        - Command: helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+        - Command: ```helm repo add prometheus-community https://prometheus-community.github.io/helm-charts```
         - Purpose: To get access to Prometheus and related tools via Helm.
      2. *Updated Helm Repositories*:
-        - Command: helm repo update
+        - Command: ```helm repo update```
         - Purpose: To ensure the latest charts are available.
      3. *Created Monitoring Namespace*:
-        - Command: kubectl create namespace monitoring
+        - Command: ```kubectl create namespace monitoring```
         - Purpose: To organize Prometheus resources within a dedicated namespace.
      4. *Installed Prometheus Operator*:
-        - Command: helm install prometheus-operator prometheus-community/kube-prometheus-stack --namespace monitoring
+        - Command: ```helm install prometheus-operator prometheus-community/kube-prometheus-stack --namespace monitoring```
         - Purpose: To deploy Prometheus and Grafana for monitoring Kubernetes.
      5. *Checked Prometheus Deployment*:
-        - Command: kubectl get all -n monitoring
+        - Command: ```kubectl get all -n monitoring```
         - Purpose: To verify that Prometheus-related components are running successfully.
    
 ### 4. *Metrics Server Setup*
    - The *Metrics Server* was installed to provide resource usage metrics for nodes and pods in Kubernetes.
    - Steps taken:
      1. *Added Metrics Server Helm Repository*:
-        - Command: helm repo add metrics-server https://kubernetes-sigs.github.io/metrics-server/
+        - Command: ```helm repo add metrics-server https://kubernetes-sigs.github.io/metrics-server/```
         - Purpose: To access the Metrics Server Helm chart.
      2. *Installed Metrics Server*:
-        - Command: helm install metrics-server metrics-server/metrics-server --namespace kube-system
+        - Command: ```helm install metrics-server metrics-server/metrics-server --namespace kube-system```
         - Purpose: To monitor cluster resource usage (CPU, Memory, etc.).
      3. *Checked Metrics Server Deployment*:
-        - Command: kubectl get deployment metrics-server -n kube-system
+        - Command: ```kubectl get deployment metrics-server -n kube-system```
         - Purpose: To ensure that the Metrics Server is deployed successfully.
      4. *Upgraded Metrics Server for Insecure TLS*:
-        - Command: helm upgrade --set args={"--kubelet-insecure-tls"} metrics-server metrics-server/metrics-server --namespace kube-system
+        - Command: ```helm upgrade --set args={"--kubelet-insecure-tls"} metrics-server metrics-server/metrics-server --namespace kube-system```
         - Purpose: To handle insecure TLS connections for metrics collection.
 
 ### 5. *Achievements*
