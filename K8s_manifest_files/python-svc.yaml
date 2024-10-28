@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Service
+metadata:
+  finalizers:
+  - service.kubernetes.io/load-balancer-cleanup
+  labels:
+    app: app-python
+  name: app-service
+  namespace: default
+spec:
+  allocateLoadBalancerNodePorts: true
+  clusterIP: 172.20.107.108
+  clusterIPs:
+  - 172.20.107.108
+  externalTrafficPolicy: Cluster
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: metrics
+    nodePort: 32126
+    port: 80
+    protocol: TCP
+    targetPort: 5000
+  selector:
+    app: app-python
+  sessionAffinity: None
+  type: LoadBalancer
